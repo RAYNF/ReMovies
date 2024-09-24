@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="160dp"
+    android:layout_height="210dp"
+    android:layout_marginTop="10dp"
+    android:background="@drawable/background_favorit"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/img_movie"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:scaleType="fitXY"
+            app:shapeAppearanceOverlay="@style/RoundedImageView" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/name_movie"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/poppinsmedium"
+        android:maxLines="1"
+        android:text="DeadPol"
+        android:textColor="@color/primaryColor"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/name_gere"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/poppinsmedium"
+        android:lines="2"
+        android:maxLines="2"
+        android:text="Action, fantasy"
+        android:textColor="@color/primaryColor"
+        android:textSize="12sp" />
+
+
+</LinearLayout>
