@@ -29,7 +29,7 @@
         android:layout_marginTop="10dp"
         android:fontFamily="@font/poppinsmedium"
         android:maxLines="1"
-        android:text="DeadPol"
+        android:text="@string/dummyJudul"
         android:textColor="@color/primaryColor"
         android:textSize="14sp" />
 
@@ -41,7 +41,7 @@
         android:fontFamily="@font/poppinsmedium"
         android:lines="2"
         android:maxLines="2"
-        android:text="Action, fantasy"
+        android:text="@string/dummyRating"
         android:textColor="@color/primaryColor"
         android:textSize="12sp" />
 

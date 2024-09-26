@@ -5,10 +5,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.domain.model.Movie
 import com.example.removies.core.R
+import com.utils.MovieDiffCallback
 
 
 class AdapterFavorite : RecyclerView.Adapter<AdapterFavorite.ViewHolderClass>() {
@@ -19,14 +21,16 @@ class AdapterFavorite : RecyclerView.Adapter<AdapterFavorite.ViewHolderClass>() 
 
     fun setData(newListData: List<Movie>?) {
         if (newListData == null) return
+        val diffCallback = MovieDiffCallback(dataList, newListData)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
         dataList.clear()
         dataList.addAll(newListData)
-        notifyDataSetChanged()
+        diffResult.dispatchUpdatesTo(this)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderClass {
         val view: View = LayoutInflater.from(parent.context)
-            .inflate(com.example.removies.core.R.layout.item_movie, parent, false)
+            .inflate(R.layout.item_movie, parent, false)
         return ViewHolderClass(view)
     }
 
@@ -34,9 +38,9 @@ class AdapterFavorite : RecyclerView.Adapter<AdapterFavorite.ViewHolderClass>() 
         val movie = dataList[position]
 
         Glide.with(holder.itemView.context)
-            .load(baseUrlImage + movie.image) // Menggabungkan URL dasar dengan path gambar dari MovieEntity
-            .placeholder(R.drawable.placeholder_image) // Gambar placeholder saat menunggu loading
-            .error(R.drawable.error_image) // Gambar saat terjadi kesalahan memuat gambar
+            .load(baseUrlImage + movie.image)
+            .placeholder(R.drawable.placeholder_image)
+            .error(R.drawable.error_image)
             .into(holder.rvImage)
 
         holder.rvTitle.text = movie.name
@@ -53,8 +57,9 @@ class AdapterFavorite : RecyclerView.Adapter<AdapterFavorite.ViewHolderClass>() 
 
     class ViewHolderClass(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val rvImage: ImageView = itemView.findViewById(R.id.imageMovie)
-        val rvTitle: TextView = itemView.findViewById(com.example.removies.core.R.id.nameMovie)
-        val rvSubTitle: TextView = itemView.findViewById(com.example.removies.core.R.id.genreMovie)
+        val rvTitle: TextView = itemView.findViewById(R.id.nameMovie)
+        val rvSubTitle: TextView = itemView.findViewById(R.id.genreMovie)
     }
 
 }
+

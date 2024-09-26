@@ -13,7 +13,7 @@ import com.example.removies.core.R
 
 class AdapterMovie : RecyclerView.Adapter<AdapterMovie.ViewHolderClass>() {
 
-    private val dataList = ArrayList<Movie>()
+    private var dataList = ArrayList<Movie>()
     var onItemClick: ((Movie) -> Unit)? = null
     private val baseUrlImage = "https://image.tmdb.org/t/p/w500"
 
@@ -21,18 +21,17 @@ class AdapterMovie : RecyclerView.Adapter<AdapterMovie.ViewHolderClass>() {
         if (newListData == null) return
         dataList.clear()
         dataList.addAll(newListData)
-        notifyDataSetChanged()
     }
 
     class ViewHolderClass(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val rvImage: ImageView = itemView.findViewById(com.example.removies.core.R.id.img_movie)
-        val rvTitle: TextView = itemView.findViewById(com.example.removies.core.R.id.name_movie)
-        val rvSubTitle: TextView = itemView.findViewById(com.example.removies.core.R.id.name_gere)
+        val rvImage: ImageView = itemView.findViewById(R.id.img_movie)
+        val rvTitle: TextView = itemView.findViewById(R.id.name_movie)
+        val rvSubTitle: TextView = itemView.findViewById(R.id.name_gere)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderClass {
         val view: View = LayoutInflater.from(parent.context)
-            .inflate(com.example.removies.core.R.layout.item_favorit, parent, false)
+            .inflate(R.layout.item_favorit, parent, false)
         return ViewHolderClass(view)
     }
 
@@ -42,9 +41,9 @@ class AdapterMovie : RecyclerView.Adapter<AdapterMovie.ViewHolderClass>() {
         val movie = dataList[position]
 
         Glide.with(holder.itemView.context)
-            .load(baseUrlImage + movie.image) // Menggabungkan URL dasar dengan path gambar dari MovieEntity
-            .placeholder(R.drawable.placeholder_image) // Gambar placeholder saat menunggu loading
-            .error(R.drawable.error_image) // Gambar saat terjadi kesalahan memuat gambar
+            .load(baseUrlImage + movie.image)
+            .placeholder(R.drawable.placeholder_image)
+            .error(R.drawable.error_image)
             .into(holder.rvImage)
 
         holder.rvTitle.text = movie.name

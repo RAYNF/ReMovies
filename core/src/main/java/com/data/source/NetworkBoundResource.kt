@@ -9,28 +9,28 @@ import kotlinx.coroutines.flow.map
 
 abstract class NetworkBoundResource<ResultType, RequestType> {
 
-    private var result: Flow<com.data.source.Resource<ResultType>> = flow {
-        emit(com.data.source.Resource.Loading())
+    private var result: Flow<Resource<ResultType>> = flow {
+        emit(Resource.Loading())
         val dbSource = loadFromDB().first()
         if (shouldFetch(dbSource)) {
-            emit(com.data.source.Resource.Loading())
+            emit(Resource.Loading())
             when (val apiResponse = createCall().first()) {
                 is ApiResponse.Success -> {
                     saveCallResult(apiResponse.data)
-                    emitAll(loadFromDB().map { com.data.source.Resource.Success(it) })
+                    emitAll(loadFromDB().map { Resource.Success(it) })
                 }
 
                 is ApiResponse.Empty -> {
-                    emitAll(loadFromDB().map { com.data.source.Resource.Success(it) })
+                    emitAll(loadFromDB().map { Resource.Success(it) })
                 }
 
                 is ApiResponse.Error -> {
                     onFetchFailed()
-                    emit(com.data.source.Resource.Error<ResultType>(apiResponse.errorMessage))
+                    emit(Resource.Error<ResultType>(apiResponse.errorMessage))
                 }
             }
         } else {
-            emitAll(loadFromDB().map { com.data.source.Resource.Success(it) })
+            emitAll(loadFromDB().map { Resource.Success(it) })
         }
     }
 
@@ -44,5 +44,5 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
 
     protected abstract suspend fun saveCallResult(data: RequestType)
 
-    fun asFlow(): Flow<com.data.source.Resource<ResultType>> = result
+    fun asFlow(): Flow<Resource<ResultType>> = result
 }

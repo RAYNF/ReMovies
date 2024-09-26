@@ -2,21 +2,21 @@ package com.data.source
 
 import com.data.source.remote.network.ApiResponse
 import com.data.source.remote.response.ResultsItem
-import com.utils.AppExecutors
-import com.utils.DataMapper
 import com.domain.model.Movie
 import com.domain.repository.IMovieRepository
+import com.utils.AppExecutors
+import com.utils.DataMapper
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-class MovieRepository public constructor(
+class MovieRepository(
     private val remoteDataSource: com.data.source.remote.RemoteDataSource,
     private val localDataSource: com.data.source.local.LocalDataSource,
     private val appExecutors: AppExecutors
 ) : IMovieRepository {
 
-    override fun getAllMovie(): Flow<com.data.source.Resource<List<Movie>>> =
-        object : com.data.source.NetworkBoundResource<List<Movie>, List<ResultsItem>>() {
+    override fun getAllMovie(): Flow<Resource<List<Movie>>> =
+        object : NetworkBoundResource<List<Movie>, List<ResultsItem>>() {
             override fun loadFromDB(): Flow<List<Movie>> {
                 return localDataSource.getAllMovie().map { DataMapper.mapEntitiesToDomain(it) }
             }

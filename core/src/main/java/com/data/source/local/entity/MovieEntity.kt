@@ -11,7 +11,6 @@ import kotlinx.parcelize.Parcelize
 @Entity(tableName = "movie")
 data class MovieEntity(
     @PrimaryKey
-    @NonNull
     @ColumnInfo(name = "movieId")
     var movieId: String,
 

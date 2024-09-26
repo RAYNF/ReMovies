@@ -2,7 +2,7 @@ package com.data.source.local
 
 import kotlinx.coroutines.flow.Flow
 
-class LocalDataSource public constructor(private val movieDao: com.data.source.local.room.MovieDao) {
+class LocalDataSource(private val movieDao: com.data.source.local.room.MovieDao) {
 
     fun getAllMovie(): Flow<List<com.data.source.local.entity.MovieEntity>> = movieDao.getAllMovie()
 

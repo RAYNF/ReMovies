@@ -6,4 +6,24 @@
     <string name="something_wrong">Oops.. something went wrong</string>
     <string name="no_data">Empty data</string>
     <string name="title_favorite">Favorite</string>
+    <string name="kembali">kembali</string>
+    <string name="foto_film">foto film</string>
+    <string name="judul_film">judul film</string>
+    <string name="rating_film">rating film</string>
+    <string name="premis_film">premis film</string>
+    <string name="simpan">simpan</string>
+    <string name="dummyJudul">Deadpool</string>
+    <string name="dummyRating">Action,Fantasy, Scifi</string>
+    <string name="dummyObverview">Overview</string>
+    <string name="dummyIsiObverview">A listless Wade Wilson toils away in civilian life with his days as the morally flexible mercenary, Deadpool, behind him. But when his homeworld faces an existential threat, Wade must reluctantly suit-up again with an even more reluctant Wolverine.</string>
+    <string name="dummyDetail">Detail</string>
+    <string name="dummyPopularity">Popularity</string>
+    <string name="dummyIsiPopularity">7</string>
+    <string name="dummyMovieId">Movie id</string>
+    <string name="dummyIsiMovieId">Released</string>
+    <string name="buttonFavorite">Favorite</string>
+    <string name="appLogo">Logo Aplikasi</string>
+    <string name="profile">profile</string>
+    <string name="setting">setting</string>
+    <string name="judulRekomendasi">Rekomendasi Film</string>
 </resources>

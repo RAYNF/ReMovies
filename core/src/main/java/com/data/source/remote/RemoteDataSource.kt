@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 
-class RemoteDataSource public constructor(private val apiService: ApiService) {
+class RemoteDataSource(private val apiService: ApiService) {
 
     suspend fun getAllMovie(): Flow<ApiResponse<List<ResultsItem>>> {
 

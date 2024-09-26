@@ -7,13 +7,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.removies.databinding.FragmentHomeBinding
 import com.example.removies.R
-import com.example.removies.presentation.ui.detail.DetailSceen
+import com.example.removies.databinding.FragmentHomeBinding
+import com.example.removies.presentation.ui.detail.DetailScreen
 import com.ui.AdapterMovie
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
+
+    companion object {
+        const val MOVIE_DETAIL_KEY = "MOVIE_DETAIL"
+    }
 
     private val homeViewModel: HomeViewModel by viewModel()
     private var _binding: FragmentHomeBinding? = null
@@ -36,12 +40,12 @@ class HomeFragment : Fragment() {
         if (activity != null) {
             val adapterMovie = AdapterMovie()
             adapterMovie.onItemClick = { selectedMovie ->
-                val intent = Intent(activity, DetailSceen::class.java)
-                intent.putExtra("MOVIE_DETAIL", selectedMovie)
+                val intent = Intent(activity, DetailScreen::class.java)
+                intent.putExtra(MOVIE_DETAIL_KEY, selectedMovie)
                 startActivity(intent)
             }
 
-            homeViewModel.movie.observe(viewLifecycleOwner, { movieList ->
+            homeViewModel.movie.observe(viewLifecycleOwner) { movieList ->
                 if (movieList != null) {
                     when (movieList) {
                         is com.data.source.Resource.Loading -> binding.progressBar.visibility =
@@ -50,6 +54,12 @@ class HomeFragment : Fragment() {
                         is com.data.source.Resource.Success -> {
                             binding.progressBar.visibility = View.GONE
                             adapterMovie.setData(movieList.data)
+
+                            with(binding.rvRecomendationMovie) {
+                                layoutManager = GridLayoutManager(requireActivity(), 2)
+                                setHasFixedSize(true)
+                                adapter = adapterMovie
+                            }
                         }
 
                         is com.data.source.Resource.Error -> {
@@ -60,13 +70,9 @@ class HomeFragment : Fragment() {
                         }
                     }
                 }
-            })
-
-            with(binding.rvRecomendationMovie) {
-                layoutManager = GridLayoutManager(requireActivity(), 2)
-                setHasFixedSize(true)
-                adapter = adapterMovie
             }
+
+
         }
     }
 
