@@ -46,7 +46,7 @@ class DashboardFragment : Fragment() {
             val tourismAdapter = AdapterFavorite()
             tourismAdapter.onItemClick = { selectedMovie ->
                 val intent = Intent(activity, DetailScreen::class.java)
-                intent.putExtra(DashboardFragment.MOVIE_DETAIL_KEY, selectedMovie)
+                intent.putExtra(MOVIE_DETAIL_KEY, selectedMovie)
                 startActivity(intent)
             }
 
